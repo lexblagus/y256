@@ -1,0 +1,201 @@
+<h1>Colors</h1>
+
+<div style="display:block; clear:both;">
+	<table border="" style="margin:0.5em; font-size:50%; background-image:none;">
+		<thead>
+			<tr>
+				<th colspan="3" class="code" style="border-color:#000;">primary yellow</th>
+			</tr>
+			<tr>
+				<th class="code" style="border-color:#000;">hex</th>
+				<th class="code" style="border-color:#000;">rgb</th>
+				<th class="code" style="border-color:#000;">hsl</th>
+			</tr>
+		</thead>
+		<tbody>
+			<td style="color:#000; border-color:#000; width:100px; height:100px; text-align:center; vertical-align:middle; background-color:#FFCC00;" class="code">#FFCC00</td>
+			<td style="color:#000; border-color:#000; width:100px; height:100px; text-align:center; vertical-align:middle; background-color:rgb(255,204,0);" class="code">rgb(255,204,0)</td>
+			<td style="color:#000; border-color:#000; width:100px; height:100px; text-align:center; vertical-align:middle; background-color:hsl(48,100%,50%);" class="code">hsl(48,100%,50%)</td>
+		</tbody>
+		<thead>
+			<tr>
+				<th colspan="3" class="code" style="border-color:#000;">secundary blue</th>
+			</tr>
+			<tr>
+				<th class="code" style="border-color:#000;">hex</th>
+				<th class="code" style="border-color:#000;">rgb</th>
+				<th class="code" style="border-color:#000;">hsl</th>
+			</tr>
+		</thead>
+		<tbody>
+			<td style="color:#000; border-color:#000; width:100px; height:100px; text-align:center; vertical-align:middle; background-color:#005E9E;" class="code">#005E9E</td>
+			<td style="color:#000; border-color:#000; width:100px; height:100px; text-align:center; vertical-align:middle; background-color:rgb(0,94,158);" class="code">rgb(0,94,158)</td>
+			<td style="color:#000; border-color:#000; width:100px; height:100px; text-align:center; vertical-align:middle; background-color:hsl(204,100%,31%);" class="code">hsl(204,100%,31%)</td>
+		</tbody>
+	</table>
+</div>
+
+<script type="text/javascript">
+var colorTable = function(jsonTaxonomy , canvasDest){
+	var codeHTML = "";
+	//var colorDefault = 'hsla(240,10%,50%,1)';
+	//var colorDefault = '#FFCC00';
+	var colorDefault = '#005E9E';
+	var colorTdBg = 'rgba(0,0,0,0)';
+	var colorBorder = '#000';
+	//var bgImg = "url('data:image/gif;base64,R0lGODlhCgAKAIAAAAAAAP///ywAAAAACgAKAAACE4QRmYca7N6J0LG2ap7qWi1xSgEAOw==')";
+	//var bgImg = "url('http://tools.quirks/templates/Images/zebras/zebra-10px-000000-ffffff.gif')";
+	var bgImg = "none";
+
+	codeHTML += '<table border="" style="float:left; margin:0.5em; font-size:50%; background-image:' + bgImg + ';">' + "\n";
+	codeHTML += '	<thead>' + "\n";
+	codeHTML += '		<tr>' + "\n";
+	for(i in jsonTaxonomy){
+		codeHTML += '<th colspan="2" class="code" style="border-color:' + colorBorder + ';">'+ jsonTaxonomy[i]['formula'] +'</th>' + "\n";
+	}
+	codeHTML += '		</tr><tr>' + "\n";
+	for(i in jsonTaxonomy){
+		codeHTML += '<th class="code" style="width:5em; border-color:' + colorBorder + ';">bg</th>' + "\n";
+		codeHTML += '<th class="code" style="width:5em; border-color:' + colorBorder + ';">font</th>' + "\n";
+	}
+	codeHTML += '		</tr>' + "\n";
+	codeHTML += '	</thead>' + "\n";
+	codeHTML += '	<tbody>' + "\n";
+
+	for(i in jsonTaxonomy[0]['values']){
+
+		codeHTML += '		<tr>' + "\n";
+		for(j in jsonTaxonomy){
+			var absolute = jsonTaxonomy[j]['values'][i];
+			var formulated = jsonTaxonomy[j]['formula'].replace( /_/g , absolute);
+			codeHTML += '			<td style="background-color:' + formulated + '; color:' + colorDefault + '; border-color:' + colorBorder + ';" class="code" title="' + formulated + '">' + jsonTaxonomy[j]['values'][i] + '</td>' + "\n";
+			codeHTML += '			<td style="background-color:' + colorTdBg + '; color:' + formulated + '; border-color:' + colorBorder + ';" class="code" title="' + formulated + '">' + jsonTaxonomy[j]['values'][i] + '</td>' + "\n";
+		}
+		codeHTML += '		</tr>' + "\n";
+	}
+
+	codeHTML += '	</tbody>' + "\n";
+	codeHTML += '</table>' + "\n";
+
+	//document.write(codeHTML);
+	if( canvasDest ){ canvasDest.innerHTML = codeHTML; }
+}
+</script>
+
+
+<h2>Basic</h2>
+<div id="canvasColorsBasic">loading&hellip;</div>
+<script type="text/javascript">
+var colorsBasic = [
+	{
+		"formula" : "#___",
+		"values" : ["00","0d","19","26","33","40","4c","59","66","73","80","8c","99","a6","b2","bf","cc","d9","e5","f2","ff"]
+	},{
+		"formula" : "rgb(_,_,_)",
+		//"values" : ["255","242.25","229.5","216.75","204","191.25","178.5","165.75","153","140.25","127.5","114.75","102","89.25","76.5","63.75","51","38.25","25.5","12.75","0"]
+		"values" : ["0","13","26","38","51","64","77","89","102","115","128","140","153","169","179","191","204","217","230","242","255"]
+	},{
+		"formula" : "hsl(0,0%,_)",
+		"values" : ["0%","5%","10%","15%","20%","25%","30%","35%","40%","45%","50%","55%","60%","65%","70%","75%","80%","85%","90%","95%","100%"]
+	},{
+		"formula" : "hsl(48,100%,_)",
+		"values" : ["0%","5%","10%","15%","20%","25%","30%","35%","40%","45%","50%","55%","60%","65%","70%","75%","80%","85%","90%","95%","100%"]
+	},{
+		"formula" : "hsl(204,100%,_)",
+		"values" : ["0%","5%","10%","15%","20%","25%","30%","35%","40%","45%","50%","55%","60%","65%","70%","75%","80%","85%","90%","95%","100%"]
+	},
+];
+colorTable( colorsBasic , document.getElementById('canvasColorsBasic') );
+</script>
+
+<br style="clear:both;">
+<h2>Alphas</h2>
+
+<div id="canvasColorsAlphaYellow">loading&hellip;</div>
+<script type="text/javascript">
+var colorsAlphaYellow = [
+	{
+		"formula" : "rgba(255,204,0,_)",
+		"values" : ["1.00","0.95","0.90","0.85","0.80","0.75","0.70","0.65","0.60","0.55","0.50","0.45","0.40","0.35","0.30","0.25","0.20","0.15","0.10","0.05","0"]
+	},{
+		"formula" : "hsla(48,100%,50%,_)",
+		"values" : ["1.00","0.95","0.90","0.85","0.80","0.75","0.70","0.65","0.60","0.55","0.50","0.45","0.40","0.35","0.30","0.25","0.20","0.15","0.10","0.05","0"]
+	},
+];
+colorTable(colorsAlphaYellow , document.getElementById('canvasColorsAlphaYellow') );
+</script>
+
+
+<div id="canvasColorsAlpha0">loading&hellip;</div>
+<script type="text/javascript">
+var colorsAlpha0 = [
+	{
+		"formula" : "rgba(0,0,0,_)",
+		"values" : ["1.00","0.95","0.90","0.85","0.80","0.75","0.70","0.65","0.60","0.55","0.50","0.45","0.40","0.35","0.30","0.25","0.20","0.15","0.10","0.05","0"]
+	},{
+		"formula" : "hsla(0,0%,0%,_)",
+		"values" : ["1.00","0.95","0.90","0.85","0.80","0.75","0.70","0.65","0.60","0.55","0.50","0.45","0.40","0.35","0.30","0.25","0.20","0.15","0.10","0.05","0"]
+	},
+];
+colorTable(colorsAlpha0 , document.getElementById('canvasColorsAlpha0') );
+</script>
+
+
+<div id="canvasColorsAlpha25">loading&hellip;</div>
+<script type="text/javascript">
+var colorsAlpha25 = [
+	{
+		"formula" : "rgba(64,64,64,_)",
+		"values" : ["1.00","0.95","0.90","0.85","0.80","0.75","0.70","0.65","0.60","0.55","0.50","0.45","0.40","0.35","0.30","0.25","0.20","0.15","0.10","0.05","0"]
+	},{
+		"formula" : "hsla(0,0%,25%,_)",
+		"values" : ["1.00","0.95","0.90","0.85","0.80","0.75","0.70","0.65","0.60","0.55","0.50","0.45","0.40","0.35","0.30","0.25","0.20","0.15","0.10","0.05","0"]
+	},
+];
+colorTable(colorsAlpha25 , document.getElementById('canvasColorsAlpha25') );
+</script>
+
+
+<div id="canvasColorsAlpha50">loading&hellip;</div>
+<script type="text/javascript">
+var colorsAlpha50 = [
+	{
+		"formula" : "rgba(128,128,128,_)",
+		"values" : ["1.00","0.95","0.90","0.85","0.80","0.75","0.70","0.65","0.60","0.55","0.50","0.45","0.40","0.35","0.30","0.25","0.20","0.15","0.10","0.05","0"]
+	},{
+		"formula" : "hsla(0,0%,50%,_)",
+		"values" : ["1.00","0.95","0.90","0.85","0.80","0.75","0.70","0.65","0.60","0.55","0.50","0.45","0.40","0.35","0.30","0.25","0.20","0.15","0.10","0.05","0"]
+	},
+];
+colorTable(colorsAlpha50 , document.getElementById('canvasColorsAlpha50') );
+</script>
+
+
+<div id="canvasColorsAlpha75">loading&hellip;</div>
+<script type="text/javascript">
+var colorsAlpha75 = [
+	{
+		"formula" : "rgba(191,191,191,_)",
+		"values" : ["1.00","0.95","0.90","0.85","0.80","0.75","0.70","0.65","0.60","0.55","0.50","0.45","0.40","0.35","0.30","0.25","0.20","0.15","0.10","0.05","0"]
+	},{
+		"formula" : "hsla(0,0%,75%,_)",
+		"values" : ["1.00","0.95","0.90","0.85","0.80","0.75","0.70","0.65","0.60","0.55","0.50","0.45","0.40","0.35","0.30","0.25","0.20","0.15","0.10","0.05","0"]
+	},
+];
+colorTable(colorsAlpha75 , document.getElementById('canvasColorsAlpha75') );
+</script>
+
+
+<div id="canvasColorsAlpha100">loading&hellip;</div>
+<script type="text/javascript">
+var colorsAlpha100 = [
+	{
+		"formula" : "rgba(255,255,255,_)",
+		"values" : ["1.00","0.95","0.90","0.85","0.80","0.75","0.70","0.65","0.60","0.55","0.50","0.45","0.40","0.35","0.30","0.25","0.20","0.15","0.10","0.05","0"]
+	},{
+		"formula" : "hsla(0,0%,100%,_)",
+		"values" : ["1.00","0.95","0.90","0.85","0.80","0.75","0.70","0.65","0.60","0.55","0.50","0.45","0.40","0.35","0.30","0.25","0.20","0.15","0.10","0.05","0"]
+	},
+];
+colorTable(colorsAlpha100 , document.getElementById('canvasColorsAlpha100') );
+</script>
